@@ -9,6 +9,8 @@ public class  EmsApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EmsApplication.class, args);
+		System.out.println("🔍 MYSQLHOST = " + System.getenv("MYSQLHOST"));
 	}
+
 
 }
