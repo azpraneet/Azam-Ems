@@ -34,4 +34,9 @@ public class PersonServiceImpl implements PersonService {
     public List<Person> getPersonByName(String name) {
             return repo.findByNameIgnoreCase(name);
     }
+
+    @Override
+    public Person getPersonById(Integer id) {
+        return (Person) repo.findAllById(id).orElse(null);
+    }
 }

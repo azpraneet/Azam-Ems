@@ -87,5 +87,39 @@ public class ViewController {
 
         return "saves"; // reload same page
     }
+    @GetMapping("/update/{id}")
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+        Person person = service.getPersonById(id);
+        model.addAttribute("person", person);
+        return "update"; // opens update.jsp
+    }
+
+    @PostMapping("/updatePerson")
+    public String updatePerson(@ModelAttribute Person person,
+                               @RequestParam("file") MultipartFile file,
+                               Model model) {
+        try {
+            if (!file.isEmpty()) {
+                String uploadDir = System.getProperty("user.dir") + "/uploads/";
+                Path uploadPath = Paths.get(uploadDir);
+                if (!Files.exists(uploadPath)) Files.createDirectories(uploadPath);
+
+                String fileName = file.getOriginalFilename();
+                Path filePath = uploadPath.resolve(fileName);
+                Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+                person.setImage("/uploads/" + fileName);
+            }
+
+            service.upsertPersonData(person);
+            model.addAttribute("message", "Person updated successfully!");
+        } catch (IOException e) {
+            e.printStackTrace();
+            model.addAttribute("message", "Update failed: " + e.getMessage());
+        }
+
+        return "redirect:/persons"; // Redirect back to list
+    }
+
+
 
 }

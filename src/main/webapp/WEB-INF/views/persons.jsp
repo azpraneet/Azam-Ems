@@ -170,6 +170,12 @@
                     <img src="${pageContext.request.contextPath}${p.image}" width="120" height="120" />
                 </td>
                 <td>${p.occupation}</td>
+                  <td>
+                      <a href="${pageContext.request.contextPath}/update/${p.id}"
+                           style="text-decoration:none; color:white; background:#0984e3; padding:6px 12px; border-radius:5px;">
+                                  Update
+                      </a>
+                  </td>
             </tr>
         </c:forEach>
     </table>

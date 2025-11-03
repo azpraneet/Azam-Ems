@@ -23,4 +23,6 @@ public class Person {
     private String email;
     private String image;
     private String occupation;
+
+
 }

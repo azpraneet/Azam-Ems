@@ -9,4 +9,6 @@ public interface PersonService {
     public String upsertPersonData(Person person);
     public List<Person> getPersonData();
     public List<Person> getPersonByName(String name);
+
+    Person getPersonById(Integer id);
 }
